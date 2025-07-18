@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Premium Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* All styles are scoped to the .premium-contact-wrapper to avoid affecting the body tag */
+        .premium-contact-wrapper {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #2b2a28; /* Base background for the page area */
+        }
+
+        /* Premium Contact Section Styles */
+        .premium-contact-section {
+            background-color: #31302e; /* A slightly lighter dark shade for depth */
+            color: #a5a5a5;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid #444;
+            border-bottom: 1px solid #444;
+        }
+
+        /* Subtle decorative background elements */
+        .premium-contact-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -150px;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(226, 198, 121, 0.03) 0%, rgba(226, 198, 121, 0) 70%);
+        }
+        
+        .premium-contact-section::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -150px;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(226, 198, 121, 0.03) 0%, rgba(226, 198, 121, 0) 70%);
+        }
+
+        .premium-contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .premium-contact-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #e2c679; /* Gold color for the main heading */
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .premium-contact-description {
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .premium-contact-details {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px 45px; /* Row and column gap */
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-item-link {
+            color: #f0f0f0; /* Near-white for better readability */
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item-link:hover {
+            color: #e2c679; /* Link turns gold on hover */
+        }
+        
+        .contact-item .contact-icon {
+            font-size: 1.2rem;
+            color: #e2c679;
+        }
+
+        .premium-cta-button {
+            display: inline-block;
+            background-color: #e2c679; /* Gold background */
+            color: #2b2a28; /* Dark text for contrast */
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .premium-cta-button:hover {
+            transform: translateY(-4px);
+            background-color: #eac56e; /* Slightly brighter gold on hover */
+            box-shadow: 0 8px 25px rgba(226, 198, 121, 0.15);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .premium-contact-section {
+                padding: 80px 20px;
+            }
+            .premium-contact-title {
+                font-size: 2.2rem;
+            }
+            .premium-contact-description {
+                font-size: 1rem;
+            }
+            .premium-contact-details {
+                flex-direction: column;
+                gap: 25px;
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="premium-contact-wrapper">
+        <section class="premium-contact-section" id="premium-contact">
+            <div class="premium-contact-container">
+                <h2 class="premium-contact-title">Let's Build Something Exceptional</h2>
+                <p class="premium-contact-description">Our team is ready to discuss your vision. Reach out to explore how we can provide tailored solutions to elevate your business.</p>
+                
+                <div class="premium-contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt contact-icon"></i>
+                        <a href="tel:+918926311077" class="contact-item-link">+91 8926311077</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <a href="mailto:info@unitriangle.com" class="contact-item-link">info@unitriangle.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe contact-icon"></i>
+                        <a href="https://www.unitriangle.com" target="_blank" class="contact-item-link">www.unitriangle.com</a>
+                    </div>
+                </div>
+
+                <a href="#consultation" class="premium-cta-button" onclick="showPopup()">Schedule a Consultation</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

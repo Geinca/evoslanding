@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Properties Showcase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+    
+    .showcase-section {
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .gold-badge {
+      display: inline-block;
+      background-color: rgba(226, 198, 121, 0.15);
+      color: #e2c679;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      padding: 10px 25px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      border: 1px solid rgba(226, 198, 121, 0.3);
+    }
+    
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+    
+    .section-title span {
+      color: #e2c679;
+      position: relative;
+    }
+    
+    .section-title span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #e2c679, #e4c17b);
+    }
+    
+    .section-subtitle {
+      color: #a5a5a5;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    
+    /* Gallery Grid */
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @media (min-width: 1600px) {
+      .property-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+    
+    .property-card {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 350px;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .property-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(226, 198, 121, 0.15);
+    }
+    
+    .property-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .property-card:hover .property-image {
+      transform: scale(1.05);
+    }
+    
+    .property-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 30px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .property-card:hover .property-overlay {
+      opacity: 1;
+    }
+    
+    .property-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+    
+    .property-location {
+      color: #e2c679;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .property-features {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.85rem;
+      color: #a5a5a5;
+    }
+    
+    .feature i {
+      color: #e2c679;
+      font-size: 0.9rem;
+    }
+    
+    /* View More Button */
+    .view-more {
+      text-align: center;
+      margin-top: 60px;
+    }
+    
+    .view-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(to right, #e2c679, #e4c17b);
+      color: #2b2a28;
+      font-weight: 600;
+      padding: 16px 40px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(226, 198, 121, 0.3);
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .view-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.5s;
+    }
+    
+    .view-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(226, 198, 121, 0.5);
+    }
+    
+    .view-btn:hover::before {
+      left: 100%;
+    }
+    
+    /* Decorative Elements */
+    .gold-dots {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(226,198,121,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    
+    .dots-1 {
+      top: 10%;
+      left: 5%;
+    }
+    
+    .dots-2 {
+      bottom: 10%;
+      right: 5%;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      .property-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+      
+      .property-card {
+        height: 320px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .showcase-section {
+        padding: 60px 15px;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1rem;
+      }
+      
+      .property-grid {
+        gap: 15px;
+      }
+      
+      .property-card {
+        height: 280px;
+      }
+      
+      .property-overlay {
+        padding: 20px;
+      }
+      
+      .property-name {
+        font-size: 1.3rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .gold-badge {
+        font-size: 12px;
+        padding: 8px 15px;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .property-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="showcase-section">
+    <!-- Decorative elements -->
+    <div class="gold-dots dots-1"></div>
+    <div class="gold-dots dots-2"></div>
+    
+    <div class="section-header">
+      <span class="gold-badge">Exclusive Collection</span>
+      <h1 class="section-title">Discover Our <span>Premium Properties</span></h1>
+      <p class="section-subtitle">Experience the pinnacle of luxury living with our hand-selected properties, designed for those who demand excellence in every detail.</p>
+    </div>
+    
+    <div class="property-grid">
+      <!-- Property 1 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/psMNQBy/Screenshot-2025-07-17-190534.png" alt="Luxury Residence" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Skyline Penthouse</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Mumbai, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> 4 Beds
+            </span>
+            <span class="feature">
+              <i class="fas fa-bath"></i> 3 Baths
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 3200 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 2 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/RTC5DW2C/Screenshot-2025-07-17-190542.png" alt="Modern Villa" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Oceanview Villa</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Goa, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> 5 Beds
+            </span>
+            <span class="feature">
+              <i class="fas fa-bath"></i> 4 Baths
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 4500 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 3 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/1tZnkmnV/Screenshot-2025-07-17-190555.png" alt="Luxury Apartment" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">The Grand Residences</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Delhi, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> 3 Beds
+            </span>
+            <span class="feature">
+              <i class="fas fa-bath"></i> 2 Baths
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 2200 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 4 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/ZRtj70sF/Screenshot-2025-07-17-190603.png" alt="Luxury Interior" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Royal Suite</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Bangalore, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> 4 Beds
+            </span>
+            <span class="feature">
+              <i class="fas fa-bath"></i> 3 Baths
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 2800 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 5 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/rGPdtdBx/Screenshot-2025-07-17-190609.png" alt="Modern Living Room" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Contemporary Loft</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Hyderabad, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> 2 Beds
+            </span>
+            <span class="feature">
+              <i class="fas fa-bath"></i> 2 Baths
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 1800 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 6 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/SXXF3kp4/Screenshot-2025-07-17-190617.png" alt="Luxury Bathroom" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Spa Retreat</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Pune, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> 3 Beds
+            </span>
+            <span class="feature">
+              <i class="fas fa-bath"></i> 3 Baths
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 2500 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 7 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/Z0tD5yz/Screenshot-2025-07-17-190841.png" alt="Modern Kitchen" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Gourmet Kitchen</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Chennai, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-utensils"></i> Chef's Kitchen
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 600 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 8 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/QvPcDbfN/Screenshot-2025-07-17-190642.png" alt="Luxury Bedroom" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Master Suite</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Gurgaon, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-bed"></i> King Size
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 800 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 9 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/MXbDhsP/Screenshot-2025-07-17-190650.png" alt="Modern Architecture" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Architectural Marvel</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Kolkata, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-building"></i> Unique Design
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 5000 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 10 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/HvQBZjh/Screenshot-2025-07-17-190658.png" alt="Luxury Pool" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Infinity Oasis</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Bengaluru, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-swimming-pool"></i> Pool
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 1200 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 11 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/Cs1TR25k/Screenshot-2025-07-17-190904.png" alt="Modern Terrace" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Sky Terrace</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Mumbai, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-umbrella-beach"></i> Outdoor Lounge
+            </span>
+            <span class="feature">
+              <i class="fas fa-vector-square"></i> 1500 sqft
+            </span>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Property 12 -->
+      <div class="property-card">
+        <img src="https://i.ibb.co/ksZWjcwM/Screenshot-2025-07-17-190717.png" alt="Luxury Dining" class="property-image">
+        <div class="property-overlay">
+          <!-- <h3 class="property-name">Formal Dining</h3>
+          <p class="property-location">
+            <i class="fas fa-map-marker-alt"></i> Delhi, India
+          </p>
+          <div class="property-features">
+            <span class="feature">
+              <i class="fas fa-utensils"></i> 12-Seater
+            </span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="view-more">
+      <!-- <button class="view-btn">
+        Explore All Properties <i class="fas fa-arrow-right"></i>
+      </button> -->
+    </div>
+  </section>
+</body>
+</html>

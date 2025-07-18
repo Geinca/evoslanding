@@ -1,90 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Top Bar</title>
+    <title>Contact Topbar</title>
     <style>
-        /* Reset and base styles */
-      
-        /* Top bar styles */
-      /* Top Bar Styles */
-.top-bar {
-    background-color: var(--primary-dark);
-    color: var(--white);
-    height: var(--top-bar-height);
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    position: relative;
-    z-index: 1001;
-}
+        .header-bar {
+            background-color: #2b2a28; /* Dark background matching navbar */
+            color: #e2c679; /* Gold text color */
+            padding: 8px 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            width: 100%;
+            border-bottom: 1px solid rgba(226, 198, 121, 0.2); /* Subtle gold border */
+        }
 
-.top-bar-container {
-    width: 100%;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
 
-.top-bar-info {
-    display: flex;
-    gap: 30px;
-}
+        .info-group {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
 
-.top-bar-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
 
-.top-bar-icon {
-    color: var(--secondary);
-    font-size: 14px;
-}
+        .info-item i {
+            color: #e2c679; /* Gold icons */
+            font-size: 14px;
+        }
 
-.top-bar-link {
-    color: var(--white);
-    text-decoration: none;
-    transition: var(--transition);
-}
+        .info-item span, 
+        .info-item a {
+            color: #e2c679; /* Gold text */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
 
-.top-bar-link:hover {
-    color: var(--secondary);
-}
+        .info-item a:hover {
+            color: white;
+            text-shadow: 0 0 5px rgba(226, 198, 121, 0.5);
+        }
 
-@media (max-width: 768px) {
-    .top-bar {
-        display: none;
-    }
-}
+        .info-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a {
+            color: #e2c679; /* Gold icons */
+            font-size: 15px;
+            transition: all 0.3s ease;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(226, 198, 121, 0.1); /* Subtle gold bg */
+        }
+
+        .social-icons a:hover {
+            color: #2b2a28; /* Dark text on hover */
+            background: #e2c679; /* Gold background on hover */
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 8px 15px;
+            }
+
+            .info-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .info-item {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .social-icons {
+                margin-top: 5px;
+                justify-content: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-bar {
+                font-size: 13px;
+            }
+            
+            .info-group {
+                gap: 6px;
+            }
+            
+            .social-icons a {
+                font-size: 14px;
+                width: 26px;
+                height: 26px;
+            }
+        }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-   <!-- Top Bar -->
-<div class="top-bar">
-    <div class="top-bar-container">
-        <div class="top-bar-info">
-            <div class="top-bar-item">
-                <i class="fas fa-phone-alt top-bar-icon"></i>
-                <a href="tel:9830636683" class="top-bar-link">9830636683</a>
+    <div class="header-bar">
+        <div class="header-content">
+            <div class="info-group">
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+918926311077">+91 9124101999</a>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Raghunathpur, Nandankanan Road, Bhubaneswar, Odisha 751024</span>
+                </div>
+                
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:info@unitringle.com">enquiry@evosalchemy.com</a>
+                </div>
             </div>
-            <div class="top-bar-item">
-                <i class="fas fa-envelope top-bar-icon"></i>
-                <a href="mailto:sutapansamanta2011@gmail.com" class="top-bar-link">sutapansamanta2011@gmail.com</a>
+
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             </div>
-        </div>
-        <div class="top-bar-item">
-            <i class="fas fa-clock top-bar-icon"></i>
-            <span>24/7 Monday to Sunday</span>
         </div>
     </div>
-</div>
-    
-
 </body>
 </html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evos Alchemy - Luxury Residences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f8f8;
+      color: #2b2a28;
+    }
+    
+    .luxury-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+    
+    .luxury-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    
+    @media (min-width: 1024px) {
+      .luxury-container {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+    
+    /* Video Section */
+    .video-wrapper {
+      flex: 1;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      transform: translateZ(0);
+    }
+    
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    
+    /* Content Section */
+    .content-wrapper {
+      flex: 1;
+      padding: 0 20px;
+    }
+    
+    @media (min-width: 1024px) {
+      .content-wrapper {
+        padding: 0 40px;
+      }
+    }
+    
+    .gold-label {
+      display: inline-block;
+      background-color: rgba(226, 198, 121, 0.2);
+      color: #e2c679;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 8px 20px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 25px;
+      position: relative;
+    }
+    
+    .section-title span {
+      color: #e2c679;
+    }
+    
+    .section-description {
+      color: #7a7a7a;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 600px;
+    }
+    
+    .highlight-text {
+      color: #a5a5a5;
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 40px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .highlight-text::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 3px;
+      background: linear-gradient(to right, #e2c679, #e4c17b);
+    }
+    
+    /* Divider */
+    .gold-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #e2c679, transparent);
+      margin: 30px 0;
+    }
+    
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .feature-icon {
+      color: #e2c679;
+      font-size: 20px;
+    }
+    
+    .feature-text {
+      color: #2b2a28;
+      font-weight: 500;
+    }
+    
+    /* CTA Buttons */
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .primary-btn {
+      background: linear-gradient(to right, #e2c679, #e4c17b);
+      color: #2b2a28;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(226, 198, 121, 0.3);
+    }
+    
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(226, 198, 121, 0.4);
+    }
+    
+    .secondary-btn {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      text-decoration: none;
+    }
+    
+    .call-icon {
+      background-color: rgba(226, 198, 121, 0.2);
+      color: #e2c679;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+    
+    .secondary-btn:hover .call-icon {
+      transform: scale(1.1);
+      background-color: rgba(226, 198, 121, 0.3);
+    }
+    
+    .call-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .call-label {
+      color: #7a7a7a;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .call-number {
+      color: #2b2a28;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .luxury-section {
+        padding: 60px 20px;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="luxury-section">
+    <div class="luxury-container">
+      <!-- Video Section -->
+      <div class="video-wrapper">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/CfQgKB2EV6k?autoplay=1&mute=1&loop=1&playlist=CfQgKB2EV6k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+      
+      <!-- Content Section -->
+      <div class="content-wrapper">
+        <span class="gold-label">Premium Living</span>
+        <h1 class="section-title">Live the <span>Tallest Class</span> of Architectural Marvel</h1>
+        <p class="section-description"style="color: white;">
+          DESIGNED BY THE RENOWNED SANJAY PURI. Evos Alchemy, Nestled in Patia's posh neighbourhood and towering above the city at 42 storeys tall, Evos Alchemy is a gated community for the city's elite. The landmark exudes opulence with its upscale residences and lush greenery, thereby creating a harmonious enclave for those who appreciate the finer aspects of life.
+        </p>
+        
+        <div class="gold-divider"></div>
+        
+        <p class="highlight-text">
+          Step out of your lavish home and partake in immersive experiences that deliver a lifestyle par excellence.
+        </p>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <i class="fas fa-building feature-icon"></i>
+            <span class="feature-text" style="color: white;">42 Storeys Tower</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-tree feature-icon"></i>
+            <span class="feature-text"style="color: white;">Lush Greenery</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-shield-alt feature-icon"></i>
+            <span class="feature-text"style="color: white;">Gated Community</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-star feature-icon"></i>
+            <span class="feature-text"style="color: white;">Elite Neighborhood</span>
+          </div>
+        </div>
+        
+        <p class="highlight-text" style="color: #e2c679; font-weight: 600;">
+          Come, live the Gold Class life.
+        </p>
+        
+        <div class="cta-buttons">
+          <a href="#enquire" class="primary-btn">
+            Enquire Now <i class="fas fa-arrow-right"></i>
+          </a>
+          
+          <a href="tel:+918926311077" class="secondary-btn">
+            <div class="call-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div class="call-text">
+              <span class="call-label">Call for enquiries</span>
+              <span class="call-number"style="color: white;">+91 8926311077</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

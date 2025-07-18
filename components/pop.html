@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Evos Alchemy Contact Popup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .divpop {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7f6;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: #000;
+      padding: 40px 30px;
+      border-radius: 16px;
+      max-width: 520px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      transform: translateY(20px);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .modal-overlay.show .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-content h2 {
+      margin-top: 15px;
+      margin-bottom: 10px;
+      color: gold;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .modal-content p {
+      color: #fff;
+      margin: 12px 0;
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .modal-content strong {
+        color: #FFD700;
+    }
+
+    .modal-content a {
+      color: gold;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .modal-content a:hover {
+      color: #ffcc00;
+      text-decoration: underline;
+    }
+
+    .logo {
+      max-width: 150px;
+      height: auto;
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 32px;
+      color: #aaa;
+      cursor: pointer;
+      font-weight: 300;
+      transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
+
+    .close-btn:hover {
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    .blurred {
+      filter: blur(8px);
+      transition: filter 0.3s ease-in-out;
+    }
+
+    @media (max-width: 600px) {
+      .modal-content {
+        padding: 30px 15px;
+        border-radius: 10px;
+      }
+
+      .modal-content h2 {
+        font-size: 24px;
+      }
+
+      .modal-content p {
+        font-size: 15px;
+      }
+
+      .close-btn {
+        font-size: 28px;
+        top: 10px;
+        right: 12px;
+      }
+
+      .logo {
+        max-width: 120px;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="divpop">
+<div id="app-content">
+  <!-- Your website content goes here -->
+</div>
+
+<div id="infoModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img src="images\cropped-Alchemy-Logo.png.webp" alt="Evos Alchemy Logo" class="logo">
+    <h2>Connect with Evos Alchemy</h2>
+    <p>We're here to help! Reach out to us through the following channels:</p>
+    <p><strong>Phone:</strong> <a href="tel:+919124101999">+91 9124101999</a></p>
+    <p><strong>Address:</strong><br>
+      Raghunathpur, Nandankanan Road,<br> Bhubaneswar, Odisha 751024</p>
+    <p><strong>Email:</strong> <a href="mailto:enquiry@evosalchemy.com">enquiry@evosalchemy.com</a></p>
+  </div>
+</div>
+</div>
+<script>
+  const infoModal = document.getElementById("infoModal");
+  const appContent = document.getElementById("app-content");
+
+  window.onload = function () {
+    setTimeout(() => {
+      infoModal.classList.add("show");
+      appContent.classList.add("blurred");
+    }, 100);
+  };
+
+  function closeModal() {
+    infoModal.classList.remove("show");
+    appContent.classList.remove("blurred");
+  }
+
+  infoModal.addEventListener('click', function(event) {
+    if (event.target === infoModal) {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
