@@ -1,184 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Evos Alchemy Contact Popup</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    .divpop {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f7f6;
-    }
+    <meta charset="UTF-8">
+    <title>Evos Alchemy Contact Popup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Existing Pop-up Styles */
+        .divpop {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+        }
 
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
 
-    .modal-overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
 
-    .modal-content {
-      background: #000;
-      padding: 40px 30px;
-      border-radius: 16px;
-      max-width: 520px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-      transform: translateY(20px);
-      transition: transform 0.3s ease-in-out;
-    }
+        .modal-content {
+            background: #fff; /* Changed to white for the form */
+            padding: 40px 30px;
+            border-radius: 16px;
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            transform: translateY(20px);
+            transition: transform 0.3s ease-in-out;
+            color: #2b2a28; /* Added for form text */
+        }
 
-    .modal-overlay.show .modal-content {
-      transform: translateY(0);
-    }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
 
-    .modal-content h2 {
-      margin-top: 15px;
-      margin-bottom: 10px;
-      color: gold;
-      font-size: 28px;
-      font-weight: 700;
-    }
+        .close-btn {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            font-size: 32px;
+            color: #aaa;
+            cursor: pointer;
+            font-weight: 300;
+            transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            z-index: 10000; /* Ensure close button is above form elements */
+        }
 
-    .modal-content p {
-      color: #fff;
-      margin: 12px 0;
-      font-size: 16px;
-      line-height: 1.7;
-      font-weight: 400;
-    }
+        .close-btn:hover {
+            color: #000; /* Changed for better visibility on white background */
+            transform: rotate(90deg);
+        }
 
-    .modal-content strong {
-        color: #FFD700;
-    }
+        .blurred {
+            filter: blur(8px);
+            transition: filter 0.3s ease-in-out;
+        }
 
-    .modal-content a {
-      color: gold;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s ease-in-out;
-    }
+        /* Form Specific Styles (adapted from your second code block) */
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #2b2a28;
+            position: relative;
+            padding-bottom: 15px;
+        }
 
-    .modal-content a:hover {
-      color: #ffcc00;
-      text-decoration: underline;
-    }
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%; /* Centered the underline */
+            transform: translateX(-50%); /* Centered the underline */
+            width: 50px;
+            height: 3px;
+            background: #e2c679;
+            border-radius: 3px;
+        }
 
-    .logo {
-      max-width: 150px;
-      height: auto;
-      display: block;
-      margin: 0 auto 20px;
-    }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            text-align: left; /* Align labels and inputs to the left */
+        }
 
-    .close-btn {
-      position: absolute;
-      top: 18px;
-      right: 20px;
-      font-size: 32px;
-      color: #aaa;
-      cursor: pointer;
-      font-weight: 300;
-      transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
-    }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2b2a28;
+        }
 
-    .close-btn:hover {
-      color: #fff;
-      transform: rotate(90deg);
-    }
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+            color: #2b2a28;
+        }
 
-    .blurred {
-      filter: blur(8px);
-      transition: filter 0.3s ease-in-out;
-    }
+        .form-control:focus {
+            outline: none;
+            border-color: #e2c679;
+            box-shadow: 0 0 0 3px rgba(226, 198, 121, 0.2);
+            background-color: white;
+        }
 
-    @media (max-width: 600px) {
-      .modal-content {
-        padding: 30px 15px;
-        border-radius: 10px;
-      }
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(to right, #e2c679, #e4c17b);
+            color: #2b2a28;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(226, 198, 121, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
 
-      .modal-content h2 {
-        font-size: 24px;
-      }
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
 
-      .modal-content p {
-        font-size: 15px;
-      }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(226, 198, 121, 0.4);
+        }
 
-      .close-btn {
-        font-size: 28px;
-        top: 10px;
-        right: 12px;
-      }
+        .submit-btn:hover::before {
+            left: 100%;
+        }
 
-      .logo {
-        max-width: 120px;
-        margin-bottom: 15px;
-      }
-    }
-  </style>
+        .form-note {
+            font-size: 14px;
+            color: #7a7a7a;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* Responsive Styles for Modal Content */
+        @media (max-width: 600px) {
+            .modal-content {
+                padding: 30px 15px;
+                border-radius: 10px;
+            }
+
+            .form-title {
+                font-size: 24px;
+            }
+
+            .close-btn {
+                font-size: 28px;
+                top: 10px;
+                right: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="divpop">
-<div id="app-content">
-  <!-- Your website content goes here -->
+    <div id="infoModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 class="form-title">Get Your Free Consultation</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="service">Service Interested In</label>
+                    <input type="text" id="service" name="service" class="form-control" placeholder="Enter a service" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Get Started Today</button>
+                <p class="form-note">We respect your privacy. Your information is secure with us.</p>
+            </form>
+        </div>
+    </div>
 </div>
 
-<div id="infoModal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <img src="images\cropped-Alchemy-Logo.png.webp" alt="Evos Alchemy Logo" class="logo">
-    <h2>Connect with Evos Alchemy</h2>
-    <p>We're here to help! Reach out to us through the following channels:</p>
-    <p><strong>Phone:</strong> <a href="tel:+919124101999">+91 9124101999</a></p>
-    <p><strong>Address:</strong><br>
-      Raghunathpur, Nandankanan Road,<br> Bhubaneswar, Odisha 751024</p>
-    <p><strong>Email:</strong> <a href="mailto:enquiry@evosalchemy.com">enquiry@evosalchemy.com</a></p>
-  </div>
-</div>
-</div>
 <script>
-  const infoModal = document.getElementById("infoModal");
-  const appContent = document.getElementById("app-content");
+    const infoModal = document.getElementById("infoModal");
+    const appContent = document.getElementById("app-content");
+    const contactForm = document.getElementById("contactForm");
 
-  window.onload = function () {
-    setTimeout(() => {
-      infoModal.classList.add("show");
-      appContent.classList.add("blurred");
-    }, 100);
-  };
+    window.onload = function () {
+        setTimeout(() => {
+            infoModal.classList.add("show");
+            appContent.classList.add("blurred");
+        }, 100);
+    };
 
-  function closeModal() {
-    infoModal.classList.remove("show");
-    appContent.classList.remove("blurred");
-  }
-
-  infoModal.addEventListener('click', function(event) {
-    if (event.target === infoModal) {
-      closeModal();
+    function closeModal() {
+        infoModal.classList.remove("show");
+        appContent.classList.remove("blurred");
     }
-  });
-</script>
 
+    infoModal.addEventListener('click', function(event) {
+        if (event.target === infoModal) {
+            closeModal();
+        }
+    });
+
+    // Form submission logic
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent actual form submission
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const service = document.getElementById("service").value;
+
+        const subject = `New Consultation Request from ${name}`;
+        const body = `Full Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService Interested In: ${service}`;
+
+        // Gmail compose link
+        const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=enquiry@evosalchemy.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Open Gmail compose in new tab
+        window.open(gmailURL, "_blank");
+
+        // Optionally, close the modal after submission
+        closeModal();
+    });
+</script>
 </body>
 </html>

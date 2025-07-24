@@ -136,52 +136,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("components/pop.html")
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById("pop").innerHTML = data;
+    // First, load the pop-up HTML dynamically
+    fetch("components/pop.html")
+        .then(response => response.text())
+        .then(data => {
+            // Insert the loaded HTML into the 'pop' element
+            document.getElementById("pop").innerHTML = data;
 
-      const infoModal = document.getElementById("infoModal");
-      const appContent = document.getElementById("app-content");
-      const closeBtn = document.querySelector(".close-btn");
+            // --- NOW THAT THE POPUP HTML IS LOADED, INITIALIZE POPUP & FORM LOGIC ---
 
-      // Function to close modal
-      function closeModal() {
-        infoModal.classList.remove("show");
-        if (appContent) appContent.classList.remove("blurred");
-      }
+            const infoModal = document.getElementById("infoModal");
+            const appContent = document.getElementById("app-content");
+            const contactForm = document.getElementById("contactForm");
 
-      // Function to show modal
-      function showModal() {
-        if (infoModal) {
-          infoModal.classList.add("show");
-          if (appContent) appContent.classList.add("blurred");
-        }
-      }
+            // Ensure elements exist before trying to interact with them
+            if (infoModal && appContent && contactForm) {
 
-      // Show popup on first load after small delay
-      setTimeout(() => {
-        showModal();
-      }, 100);
+                // Show the pop-up after a short delay on page load
+                // This will now run AFTER the 'pop.html' content is in place
+                setTimeout(() => {
+                    infoModal.classList.add("show");
+                    appContent.classList.add("blurred");
+                }, 100);
 
-      // Attach close button
-      if (closeBtn) {
-        closeBtn.addEventListener("click", closeModal);
-      }
+                // Function to close the modal
+                function closeModal() {
+                    infoModal.classList.remove("show");
+                    appContent.classList.remove("blurred");
+                }
 
-      // Close if clicked outside modal content
-      infoModal.addEventListener("click", function (event) {
-        if (event.target === infoModal) {
-          closeModal();
-        }
-      });
+                // Close modal when clicking outside the content
+                infoModal.addEventListener('click', function(event) {
+                    if (event.target === infoModal) {
+                        closeModal();
+                    }
+                });
 
-       // ✅ Manual trigger function
-    window.showPopup = function () {
-      infoModal.classList.add("show");
-      appContent.classList.add("blurred");
-    };
-    })
-    .catch(error => console.error("Error loading the popup:", error));
+                // Form submission logic
+                contactForm.addEventListener("submit", function (e) {
+                    e.preventDefault(); // Prevent actual form submission
+
+                    const name = document.getElementById("name").value;
+                    const email = document.getElementById("email").value;
+                    const phone = document.getElementById("phone").value;
+                    const service = document.getElementById("service").value;
+
+                    const subject = `New Consultation Request from ${name}`;
+                    const body = `Full Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService Interested In: ${service}`;
+
+                    // Gmail compose link
+                    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=enquiry@evosalchemy.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+                    // Open Gmail compose in new tab
+                    window.open(gmailURL, "_blank");
+
+                    // Optionally, close the modal after submission
+                    closeModal();
+                });
+            } else {
+                console.error("Error: One or more pop-up elements (infoModal, appContent, contactForm) not found after loading pop.html.");
+            }
+        })
+        .catch(error => console.error("Error loading the pop-up content:", error));
 });
 
